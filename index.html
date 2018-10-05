@@ -3,7 +3,7 @@
 <script>
 
   var myTicket = [];
-  var want = [3, 8, 11];
+  var want = [];
   var dontWant = [5, 7, 20]
 
   var winningTicket = [];
@@ -37,8 +37,7 @@
           line.push(slumpTal);
           i++;
         }
-      }
-    }
+      }};
 
     // sortera lottoraderna
     var sortLine = line.sort(function(a, b)
@@ -51,29 +50,55 @@
   };
 
 
+  function createExtraNum(win) {
+    var extraNum = [];
+    var i = 0;
+    while (i < 4) {
+      var slumpTal = Math.ceil(Math.random() * 35);
+      if (win.includes(slumpTal)) {
+        i = i;
+      } else {
+        extraNum.push(slumpTal);
+        i++;
+      }};
+     return(extraNum);
+  };
+
+
   // funktion som kollar antal rätt i spelarens lottorad
   function checkMatch(player, lottery) {
     var match = 0;
     for (var i = 0; i < 7; i++) {
       var n = player[i];
-      //console.log(n)
       if (lottery.includes(n)) {
         match += 1;
       } else {
         match = match;
       }
-    }
+    }; // end for-loop
 
-    return("You have " + match + " correct numbers.");
+    var extraMatch = 0;
+    for (var i = 0; i < 4; i++) {
+      var n = player[i];
+      //console.log(n)
+      if (lottery.includes(n)) {
+        extraMatch += 1;
+      } else {
+        extraMatch = extraMatch;
+      }
+    }; // end for-loop
+
+    return("You have " + match + " + " + extraMatch + " correct numbers.");
   };
 
   createTicket(myTicket, want, dontWant);
   createTicket(winningTicket);
+  var extraLine = createExtraNum(winningTicket);
 
   var matchingNumbers = checkMatch(myTicket, winningTicket);
 
   console.log(myTicket)
-  console.log(winningTicket)
+  console.log(winningTicket, extraLine)
   console.log(matchingNumbers)
 
 </script>
