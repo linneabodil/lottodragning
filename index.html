@@ -5,19 +5,25 @@
   var myTicket = [];
   var winningTicket = [];
 
-  function createTicket(line) {
+  function createTicket(line, n = 0) {
   var i = 0;
+  if (n != 0) {
+    line.push(n);
+    i++;
+  }
   while (i < 7) {
     var slumpTal = Math.ceil(Math.random() * 35);
     if (line.includes(slumpTal)) {
       i = i;
     } else {
       line.push(slumpTal);
-      i = i + 1;
+      i++;
     }
   }};
 
-  createTicket(myTicket);
+  var num = 3;
+
+  createTicket(myTicket, num);
   createTicket(winningTicket);
 
   console.log(myTicket)
