@@ -3,30 +3,36 @@
 <script>
 
   var myTicket = [];
-  var chosen = [3, 8, 11];
+  var want = [3, 8, 11];
+  var dontWant = [5, 7, 20]
 
   var winningTicket = [];
 
-  function createTicket(line, arr = []) {
-  var l = arr.length;
+  function createTicket(line = [], add = [], remove = []) {
+  var l = add.length;
     for (var j = 0; j < l; j++) {
-      var n = arr[j];
+      var n = add[j];
       line.push(n)
     }
 
-  var i = arr.length;
+  var i = add.length;
   while (i < 7) {
     var slumpTal = Math.ceil(Math.random() * 35);
-    if (line.includes(slumpTal)) {
+    if (remove.includes(slumpTal)) {
       i = i;
-    } else {
-      line.push(slumpTal);
-      i++;
+    }
+    else {
+      if (line.includes(slumpTal)) {
+        i = i;
+      } else {
+        line.push(slumpTal);
+        i++;
+      }
     }
   } return(line);
   };
 
-  createTicket(myTicket, chosen);
+  createTicket(myTicket, want, dontWant);
   createTicket(winningTicket);
 
   console.log(myTicket)
