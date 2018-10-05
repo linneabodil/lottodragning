@@ -8,18 +8,22 @@
 
   var winningTicket = [];
 
+  // funktion som skapar lottorader
   function createTicket(line = [], add = [], remove = []) {
+    // kollar så att spelar skickat in önskenummer
     for (var i = 0; i < add.length; i++) {
       if (Number.isInteger(add[i]) == false) {
         return("You need numbers.");
       }
     };
 
+    // lägger till önskenummer i lottorader
     for (var j = 0; j < add.length; j++) {
       var n = add[j];
       line.push(n)
     };
 
+    // skapar en array med 7 siffror
     var i = add.length;
     while (i < 7) {
       var slumpTal = Math.ceil(Math.random() * 35);
@@ -34,14 +38,43 @@
           i++;
         }
       }
-    } return(line);
-    };
+    }
+
+    // sortera lottoraderna
+    var sortLine = line.sort(function(a, b)
+      {
+        return a - b;
+      });
+
+    // avslutar funktionen, returnerar lottoraden
+    return(sortLine);
+  };
+
+
+  // funktion som kollar antal rätt i spelarens lottorad
+  function checkMatch(player, lottery) {
+    var match = 0;
+    for (var i = 0; i < 7; i++) {
+      var n = player[i];
+      //console.log(n)
+      if (lottery.includes(n)) {
+        match += 1;
+      } else {
+        match = match;
+      }
+    }
+
+    return("You have " + match + " correct numbers.");
+  };
 
   createTicket(myTicket, want, dontWant);
   createTicket(winningTicket);
 
+  var matchingNumbers = checkMatch(myTicket, winningTicket);
+
   console.log(myTicket)
   console.log(winningTicket)
+  console.log(matchingNumbers)
 
 </script>
 </html>
