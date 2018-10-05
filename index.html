@@ -3,14 +3,18 @@
 <script>
 
   var myTicket = [];
+  var chosen = [3, 8, 11];
+
   var winningTicket = [];
 
-  function createTicket(line, n = 0) {
-  var i = 0;
-  if (n != 0) {
-    line.push(n);
-    i++;
-  }
+  function createTicket(line, arr = []) {
+  var l = arr.length;
+    for (var j = 0; j < l; j++) {
+      var n = arr[j];
+      line.push(n)
+    }
+
+  var i = arr.length;
   while (i < 7) {
     var slumpTal = Math.ceil(Math.random() * 35);
     if (line.includes(slumpTal)) {
@@ -19,11 +23,10 @@
       line.push(slumpTal);
       i++;
     }
-  }};
+  } return(line);
+  };
 
-  var num = 3;
-
-  createTicket(myTicket, num);
+  createTicket(myTicket, chosen);
   createTicket(winningTicket);
 
   console.log(myTicket)
