@@ -9,28 +9,33 @@
   var winningTicket = [];
 
   function createTicket(line = [], add = [], remove = []) {
-  var l = add.length;
-    for (var j = 0; j < l; j++) {
+    for (var i = 0; i < add.length; i++) {
+      if (Number.isInteger(add[i]) == false) {
+        return("You need numbers.");
+      }
+    };
+
+    for (var j = 0; j < add.length; j++) {
       var n = add[j];
       line.push(n)
-    }
+    };
 
-  var i = add.length;
-  while (i < 7) {
-    var slumpTal = Math.ceil(Math.random() * 35);
-    if (remove.includes(slumpTal)) {
-      i = i;
-    }
-    else {
-      if (line.includes(slumpTal)) {
+    var i = add.length;
+    while (i < 7) {
+      var slumpTal = Math.ceil(Math.random() * 35);
+      if (remove.includes(slumpTal)) {
         i = i;
-      } else {
-        line.push(slumpTal);
-        i++;
       }
-    }
-  } return(line);
-  };
+      else {
+        if (line.includes(slumpTal)) {
+          i = i;
+        } else {
+          line.push(slumpTal);
+          i++;
+        }
+      }
+    } return(line);
+    };
 
   createTicket(myTicket, want, dontWant);
   createTicket(winningTicket);
