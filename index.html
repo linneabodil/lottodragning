@@ -1,0 +1,27 @@
+<html>
+<meta charset="utf-8">
+<script>
+
+  var myTicket = [];
+  var winningTicket = [];
+
+  function createTicket(line) {
+  var i = 0;
+  while (i < 7) {
+    var slumpTal = Math.ceil(Math.random() * 35);
+    if (line.includes(slumpTal)) {
+      i = i;
+    } else {
+      line.push(slumpTal);
+      i = i + 1;
+    }
+  }};
+
+  createTicket(myTicket);
+  createTicket(winningTicket);
+
+  console.log(myTicket)
+  console.log(winningTicket)
+
+</script>
+</html>
