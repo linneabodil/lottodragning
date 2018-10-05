@@ -2,12 +2,6 @@
 <meta charset="utf-8">
 <script>
 
-  var myTicket = [];
-  var want = [];
-  var dontWant = [5, 7, 20]
-
-  var winningTicket = [];
-
   // funktion som skapar lottorader
   function createTicket(line = [], add = [], remove = []) {
     // kollar så att spelar skickat in önskenummer
@@ -88,18 +82,40 @@
       }
     }; // end for-loop
 
-    return("You have " + match + " + " + extraMatch + " correct numbers.");
+    // kolla winst
+    var winComment = "";
+    if (match < 4) {
+      winComment = "Tyvärr, ingen vinst denna dragning.";
+    } else if (match == 4) {
+      winComment = "Grattis, fyra rätt ger 350 kr!";
+    } else if (match == 5) {
+      winComment = "Grattis, fem rätt ger 2000 kr!"
+    } else if (match == 6) {
+      if (extraMatch > 0) {
+        winComment = "Fantastiskt, sex plus ett rätt ger 25 000 kr!"
+      } else {
+        winComment = "Grattis, sex rätt ger 12 000 kr!"
+      }
+    } else if (match == 7) {
+      winComment = "JACKPOTT! Du vinner 5 miljarder kronor!";
+    }
+
+    return("Du fick " + match + " + " + extraMatch + " rätt. \n"
+    + winComment);
   };
 
-  createTicket(myTicket, want, dontWant);
-  createTicket(winningTicket);
-  var extraLine = createExtraNum(winningTicket);
+  var want = []; // önkenummer i spelarens lottorad
+  var dontWant = []; // nummer man inte vill ha i sin lottorad
 
-  var matchingNumbers = checkMatch(myTicket, winningTicket);
+  var myTicket = createTicket(myTicket, want, dontWant);
+  var winningTicket = createTicket(winningTicket);
+
+  var extraLine = createExtraNum(winningTicket);
+  var checkWin = checkMatch(myTicket, winningTicket);
 
   console.log(myTicket)
   console.log(winningTicket, extraLine)
-  console.log(matchingNumbers)
+  console.log(checkWin)
 
 </script>
 </html>
